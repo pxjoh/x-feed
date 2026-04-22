@@ -1,12 +1,15 @@
 'use client';
 
-type Tab = 'trending' | 'sports' | 'competition';
+type Tab = 'trending' | 'sports' | 'competition' | 'following';
 
 const TABS: { id: Tab; label: string }[] = [
+  { id: 'following', label: 'Following' },
   { id: 'trending', label: 'Trending' },
   { id: 'sports', label: 'Sports' },
   { id: 'competition', label: 'Competition' },
 ];
+
+export type { Tab };
 
 interface TabNavProps {
   activeTab: Tab;

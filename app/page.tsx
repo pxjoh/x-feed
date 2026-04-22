@@ -2,14 +2,13 @@
 
 import { useState } from 'react';
 import TabNav from '@/components/TabNav';
+import type { Tab } from '@/components/TabNav';
 import SportFilter from '@/components/SportFilter';
 import type { Sport } from '@/components/SportFilter';
 import Feed from '@/components/Feed';
 
-type Tab = 'trending' | 'sports' | 'competition';
-
 export default function Page() {
-  const [tab, setTab] = useState<Tab>('trending');
+  const [tab, setTab] = useState<Tab>('following');
   const [sport, setSport] = useState<Sport>('nba');
 
   return (

@@ -67,19 +67,20 @@ export async function searchRecentTweets(
   query: string,
   maxResults = 100,
   startHoursAgo = 12,
-  endHoursAgo = 1,
+  endHoursAgo?: number,
 ): Promise<Tweet[]> {
   const startTime = new Date(Date.now() - startHoursAgo * 60 * 60 * 1000).toISOString();
-  const endTime = new Date(Date.now() - endHoursAgo * 60 * 60 * 1000).toISOString();
   const params = new URLSearchParams({
     query,
     max_results: String(Math.min(maxResults, 100)),
     start_time: startTime,
-    end_time: endTime,
     'tweet.fields': 'created_at,public_metrics,author_id',
     expansions: 'author_id',
     'user.fields': 'name,username,profile_image_url',
   });
+  if (endHoursAgo !== undefined && endHoursAgo > 0) {
+    params.set('end_time', new Date(Date.now() - endHoursAgo * 60 * 60 * 1000).toISOString());
+  }
 
   const res = await fetch(`${BASE_URL}/tweets/search/recent?${params}`, {
     headers: authHeader(),

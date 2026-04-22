@@ -39,7 +39,7 @@ function ErrorState({ message }: { message: string }) {
   );
 }
 
-type Tab = 'trending' | 'sports' | 'competition';
+import type { Tab } from './TabNav';
 
 interface FeedProps {
   tab: Tab;
@@ -47,6 +47,7 @@ interface FeedProps {
 }
 
 function apiUrl(tab: Tab, sport: string): string {
+  if (tab === 'following') return '/api/tweets/following';
   if (tab === 'trending') return '/api/tweets/trending';
   if (tab === 'sports') return `/api/tweets/sports?topic=${sport}`;
   return '/api/tweets/competitors';
